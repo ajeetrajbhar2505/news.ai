@@ -1,1 +1,214 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+@media (max-width: 480px) {
+    .container {
+        width: 100% !important;
+    }
+}
+
+.container {
+    width: 375px !important;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.categories::-webkit-scrollbar,.breaking-news::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  .categories,.breaking-news {
+    scrollbar-width: none;
+    /* Firefox */
+  }
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .fa {
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #EFEFEF;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 0 10px;
+}
+.search-bar input {
+    border: none;
+    background: none;
+    flex: 1;
+    outline: none;
+    padding: 0 10px;
+}
+.breaking-news {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.breaking-news h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
+    position: sticky;
+    left: 0;
+}
+.news-item {
+    display: inline-block;
+    background-color: #EFEFEF;
+    border-radius: 20px;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 300px;
+    vertical-align: top;
+}
+.news-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.news-item .news-content {
+    padding: 10px;
+}
+.news-item .news-content h3 {
+    font-size: 16px;
+    margin: 0 0 10px;
+}
+.news-item .news-content p {
+    font-size: 14px;
+    color: #666;
+}
+.categories {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px 0 0 0px;
+}
+.category {
+    background-color: #EFEFEF;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-radius: 30px;
+    border-top: 1px solid #EFEFEF;
+    background-color: #EFEFEF;
+    position: fixed;
+    width: 90%;
+    bottom: 5px;
+}
+.footer .fa {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #FFFFFF;
+    transition: 0.3s;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.sidebar.active {
+    left: 0;
+}
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #EFEFEF;
+}
+.sidebar-header .fa {
+    font-size: 24px;
+    cursor: pointer;
+}
+.sidebar-menu {
+    padding: 20px;
+}
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+}
+.sidebar-menu a .fa {
+    margin-right: 10px;
+}
+.sidebar-menu a:hover {
+    background-color: #EFEFEF;
+    border-radius: 10px;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+.overlay.active {
+    display: block;
+}
+
+.two-icons{
+    display: flex;
+    gap: 30px;
+}
+
+.recommended {
+    padding: 20px 0 0 0;
+}
+.recommended h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
+}
+.recommended-item {
+    display: flex;
+    align-items: center;
+    background-color: #EFEFEF;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.recommended-item img {
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+}
+.recommended-content {
+    padding: 10px;
+    flex: 1;
+}
+.recommended-content h3 {
+    font-size: 16px;
+    margin: 0 0 10px;
+}
+.recommended-content p {
+    font-size: 14px;
+    color: #666;
+}
