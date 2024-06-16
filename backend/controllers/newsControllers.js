@@ -10,3 +10,5 @@ exports.getNews = async (req, res) => {
         res.status(500).json({ status: 500, message: 'Server error' });
     }
 };
+
+
