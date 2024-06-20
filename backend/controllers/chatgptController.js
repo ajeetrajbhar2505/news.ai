@@ -1,11 +1,31 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const genAI = new GoogleGenerativeAI(process.env.gemini_api_key);
+const fs = require("fs");
+const path = require("path");
+// const filePath = path.join(__dirname, "../public/images/cookie.png");
+const filePath = path.join(__dirname, "../public/images/html.png");
 
+
+const genAI = new GoogleGenerativeAI(process.env.gemini_api_key);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+const image = {
+    inlineData: {
+      data: Buffer.from(fs.readFileSync(filePath)).toString("base64"),
+      mimeType: "image/png",
+    },
+  };
+
+  
 exports.askQuestion = async (req, res) => {
     try {
         const { prompt } = req.body;
-        const response = await run(prompt);
+        // Image to text generation 
+        const result = await model.generateContent(['Generate HTML/CSS code for a webpage based on the attached image. The image features a minimalist design with a gradient background (blue to white), a centered logo at the top, and a navigation bar with rounded buttons (black background, white text). Below the navigation, there are three sections with different background colors (light grey, white, and beige). Each section contains centered text with a 20px padding around it. Ensure the webpage is responsive for mobile devices and uses Bootstrap 4 for layout.', image]);
+        console.log(result.response.text());
 
+
+        // prompt to text generation
+        const response = await run(prompt);
         // Process the response to replace ** with <b> and end ** with </b> and \n with <br>
         const formattedResponse = extractNews(formatResponse(response));
 

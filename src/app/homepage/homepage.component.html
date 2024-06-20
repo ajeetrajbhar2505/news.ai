@@ -39,41 +39,20 @@
     </div>
 
     <div class="categories">
-        <div class="category">All</div>
-        <div class="category">Politic</div>
-        <div class="category">Sport</div>
-        <div class="category">Education</div>
-        <div class="category">Game</div>
+        <div class="category" (click)="askQuestion('Sports')">All</div>
+        <div class="category" (click)="askQuestion('Politics')">Politic</div>
+        <div class="category" (click)="askQuestion('Sports')">Sport</div>
+        <div class="category" (click)="askQuestion('Education')">Education</div>
+        <div class="category" (click)="askQuestion('Games')">Game</div>
     </div>
 
     <div class="recommended">
         <h2>Recommended for you</h2>
-        <div class="recommended-item" routerLink="/content">
+        <div class="recommended-item" routerLink="/content" *ngFor="let data of sportsNews">
             <img src="https://via.placeholder.com/100x100" alt="News Image">
             <div class="recommended-content">
-                <h3>FIFA announces new regulations to tackle racism in football</h3>
-                <p>Kristin Watson - Sports - Feb 28, 2023</p>
-            </div>
-        </div>
-        <div class="recommended-item" routerLink="/content">
-            <img src="https://via.placeholder.com/100x100" alt="News Image">
-            <div class="recommended-content">
-                <h3>Major wildfires continue to ravage Australia's forests</h3>
-                <p>Marvin McKinney - Nature - Feb 28, 2023</p>
-            </div>
-        </div>
-        <div class="recommended-item" routerLink="/content">
-            <img src="https://via.placeholder.com/100x100" alt="News Image">
-            <div class="recommended-content">
-                <h3>Major wildfires continue to ravage Australia's forests</h3>
-                <p>Marvin McKinney - Nature - Feb 28, 2023</p>
-            </div>
-        </div>
-        <div class="recommended-item" routerLink="/content">
-            <img src="https://via.placeholder.com/100x100" alt="News Image">
-            <div class="recommended-content">
-                <h3>Major wildfires continue to ravage Australia's forests</h3>
-                <p>Marvin McKinney - Nature - Feb 28, 2023</p>
+                <h3 [innerHTML]="data.title"></h3>
+                <p [innerHTML]="data.description"></p>
             </div>
         </div>
     </div>
