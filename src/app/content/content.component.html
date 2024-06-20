@@ -5,7 +5,7 @@
     </div>
 
     <div class="article-info">
-        <img src="https://via.placeholder.com/40" alt="Author Image">
+        <img src="assets/latestnews.png" alt="Author Image">
         <div>
             <span>CNN India</span> &middot; <span>{{ formatDateString(news?.updatedAt) || '' }}</span> &middot; <span>{{ news?.category || 'World' }}</span>
           </div>
@@ -14,8 +14,7 @@
     <div class="article-title">
        {{news?.title?news?.title:''}}
     </div>
-
-    <img src="https://via.placeholder.com/375x200" alt="Article Image" class="article-image">
+    <img src="assets/latestnews.png" alt="Article Image" class="article-image">
     <div class="article-caption">Damage of tornadoes</div>
 
     <div class="article-content" [innerHTML]="news?.content?news?.content:''">

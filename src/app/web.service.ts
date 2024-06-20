@@ -26,7 +26,7 @@ export class WebService {
     this.rotate = true
     const payload = {
       category : topic,
-      "prompt": `could you give news on ${topic} of India, i want to integrate in frontend so i was title  and description of that,title should be in title key and dexription in description`
+      "prompt": `could you give news on ${topic} of India atleast 50 lines, i want to integrate in frontend so i was title  and description of that,title should be in title key and dexription in description`
     }
 
     const req = new Requestmodels();

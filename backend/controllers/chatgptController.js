@@ -1,6 +1,8 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const path = require("path");
+
+
 // const filePath = path.join(__dirname, "../public/images/cookie.png");
 const filePath = path.join(__dirname, "../public/images/html.png");
 const genAI = new GoogleGenerativeAI(process.env.gemini_api_key);
@@ -15,15 +17,17 @@ const image = {
     },
 };
 
+
 const News = require('../models/newsModel');
 
 exports.askQuestion = async (req, res) => {
     try {
-        const { prompt,category } = req.body;
+        const { prompt, category } = req.body;
         // Image to text generation 
         // const result = await model.generateContent(['Generate HTML/CSS code for a webpage based on the attached image. The image features a minimalist design with a gradient background (blue to white), a centered logo at the top, and a navigation bar with rounded buttons (black background, white text). Below the navigation, there are three sections with different background colors (light grey, white, and beige). Each section contains centered text with a 20px padding around it. Ensure the webpage is responsive for mobile devices and uses Bootstrap 4 for layout.', image]);
         // const formatImageToTextResponse = extractTextFromBackticks(result.response.text())
 
+        
 
         // prompt to text generation
         const response = await run(prompt);
@@ -35,17 +39,17 @@ exports.askQuestion = async (req, res) => {
             formattedResponse.forEach(data => {
                 const newNews = new News({
                     title: data.title,
-                    author: "Unknown Author", 
+                    author: "Unknown Author",
                     content: data.description || data.title,
                     summary: (data.description || data.title).split('.')[0] + '.',
                     category: category,
-                    tags: [category, "India"], 
+                    tags: [category, "India"],
                     imageUrl: "",
                     sourceUrl: "",
                     views: 0,
                     comments: []
                 });
-        
+
                 newNews.save()
             })
         }
