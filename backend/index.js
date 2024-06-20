@@ -11,18 +11,26 @@ app.use(cors());
 app.use(express.static(__dirname + "/public"));
 const newsRoute = require('./routes/newsRoute')
 const chatgptRoute = require('./routes/chatgptRoute')
-app.use('/', newsRoute);
+const connection = require('./utils/database');
+
+
 app.use('/askQuestion', chatgptRoute);
+app.use('/', newsRoute);
 
 
 
-
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-console.log(`Server is running on port ${port}`);
-});
-
+// Establish database connection
+connection()
+    .then(() => {
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    })
+    .catch(err => {
+        console.error('Error connecting to the database:', err);
+        process.exit(1); // Exit the process if unable to connect to the database
+    });
 
 
 

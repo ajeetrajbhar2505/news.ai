@@ -20,17 +20,18 @@ export class HomepageComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.askQuestion('sports')
+    this.askQuestion('Sports')
   }
 
 
    askQuestion(topic:string) {
+    this.webService.currentQuestion = topic
     const payload = {
-      "prompt": `could you give news on ${topic} of India, i want to integrate in frontend so i was title  and description of that,title should be in title key and dexription in description`
+      category : topic,
     }
 
     const req = new Requestmodels();
-    req.RequestUrl = `askQuestion`;
+    req.RequestUrl = `NewsCategoryWise`;
     req.RequestObject = payload;
 
      this.webService

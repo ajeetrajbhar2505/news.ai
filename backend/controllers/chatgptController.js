@@ -6,19 +6,20 @@ const filePath = path.join(__dirname, "../public/images/html.png");
 const genAI = new GoogleGenerativeAI(process.env.gemini_api_key);
 
 
- // Image to text generation 
+// Image to text generation 
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const image = {
     inlineData: {
-      data: Buffer.from(fs.readFileSync(filePath)).toString("base64"),
-      mimeType: "image/png",
+        data: Buffer.from(fs.readFileSync(filePath)).toString("base64"),
+        mimeType: "image/png",
     },
-  };
+};
 
-  
+const News = require('../models/newsModel');
+
 exports.askQuestion = async (req, res) => {
     try {
-        const { prompt } = req.body;
+        const { prompt,category } = req.body;
         // Image to text generation 
         // const result = await model.generateContent(['Generate HTML/CSS code for a webpage based on the attached image. The image features a minimalist design with a gradient background (blue to white), a centered logo at the top, and a navigation bar with rounded buttons (black background, white text). Below the navigation, there are three sections with different background colors (light grey, white, and beige). Each section contains centered text with a 20px padding around it. Ensure the webpage is responsive for mobile devices and uses Bootstrap 4 for layout.', image]);
         // const formatImageToTextResponse = extractTextFromBackticks(result.response.text())
@@ -29,7 +30,26 @@ exports.askQuestion = async (req, res) => {
         // Process the response to replace ** with <b> and end ** with </b> and \n with <br>
         const formattedResponse = extractNews(formatResponse(response));
 
-        res.send({ status: 200, response: formattedResponse});
+        res.send({ status: 200, response: formattedResponse });
+        if (formattedResponse.length > 0) {
+            formattedResponse.forEach(data => {
+                const newNews = new News({
+                    title: data.title,
+                    author: "Unknown Author", 
+                    content: data.description || data.title,
+                    summary: (data.description || data.title).split('.')[0] + '.',
+                    category: category,
+                    tags: [category, "India"], 
+                    imageUrl: "",
+                    sourceUrl: "",
+                    views: 0,
+                    comments: []
+                });
+        
+                newNews.save()
+            })
+        }
+
     } catch (error) {
         console.log(error);
         res.send({ status: 200, response: 'Cannot provide an answer for this question' });
@@ -63,7 +83,7 @@ function isSafetyError(error) {
 function formatResponse(response) {
     // Replace **text** with <b>text</b>
     let formattedResponse = response.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-    
+
     // Replace \n with <br>
     formattedResponse = formattedResponse.replace(/\n/g, '<br>');
     formattedResponse = formattedResponse.replace(/\*/g, '');

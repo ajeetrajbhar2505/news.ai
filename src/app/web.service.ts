@@ -9,7 +9,7 @@ import { Requestmodels } from './models/Requestmodels.module';
 })
 export class WebService {
   headers: any = new Headers({});
-
+  currentQuestion:string = ""
 
   constructor(private http: HttpClient) { }
 
@@ -21,5 +21,31 @@ export class WebService {
       })
   }
 
+  regenerateNews(topic = this.currentQuestion || 'Sports'){
+    const payload = {
+      category : topic,
+      "prompt": `could you give news on ${topic} of India, i want to integrate in frontend so i was title  and description of that,title should be in title key and dexription in description`
+    }
+
+    const req = new Requestmodels();
+    req.RequestUrl = `askQuestion`;
+    req.RequestObject = payload;
+
+     this
+      .PostData(req)
+      .subscribe(
+        (data) => {
+          if (data != null) {
+            if (data.status !== 200) {
+              return;
+            }
+          }
+        },
+        (_error) => {
+          return;
+        },
+        () => { }
+      );
+  }
 
 }
