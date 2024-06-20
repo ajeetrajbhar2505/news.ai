@@ -9,7 +9,7 @@ import { WebService } from './web.service';
 })
 export class AppComponent {
 
-  constructor(private webService: WebService) { }
+  constructor(public webService: WebService) { }
 
   refreshNews(){
     this.webService.regenerateNews()

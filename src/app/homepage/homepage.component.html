@@ -22,7 +22,7 @@
 
     <div class="breaking-news">
         <h2>Breaking News</h2>
-        <div class="news-item" routerLink="/content" *ngFor="let data of sportsNews">
+        <div class="news-item" (click)="routoToContent(data._id)" *ngFor="let data of sportsNews">
             <img src="assets/latestnews.png" alt="Latest News">
             <div class="news-content">
                 <h3 [innerHTML]="data.title"></h3>
@@ -44,7 +44,7 @@
 
     <div class="recommended">
         <h2>News of the day</h2>
-        <div class="recommended-item" routerLink="/content" *ngFor="let data of sportsNews">
+        <div class="recommended-item" (click)="routoToContent(data._id)" *ngFor="let data of sportsNews">
             <img src="assets/latestnews.png" alt="Latest News">
             <div class="recommended-content">
                 <h3 [innerHTML]="data.title"></h3>

@@ -28,4 +28,18 @@ exports.getNewsCategoryWise = async (req, res) => {
     }
 };
 
+exports.getNewsIdWise = async (req, res) => {
+    try {
+
+        const { _id } = req.body;
+        const messages = await News.findById(_id);
+        
+        // Respond with the fetched messages
+        res.status(200).json({ status: 200, response: messages });
+    } catch (err) {
+        // Handle any errors
+        res.status(500).json({ status: 500, response: 'Server error',errorType : err });
+    }
+};
+
 

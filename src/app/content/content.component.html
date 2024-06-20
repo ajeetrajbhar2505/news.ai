@@ -7,23 +7,18 @@
     <div class="article-info">
         <img src="https://via.placeholder.com/40" alt="Author Image">
         <div>
-            <span>CNN Indonesia</span> &middot; <span>Feb 28, 2023</span> &middot; <span>World</span>
-        </div>
+            <span>CNN India</span> &middot; <span>{{ formatDateString(news?.updatedAt) || '' }}</span> &middot; <span>{{ news?.category || 'World' }}</span>
+          </div>
     </div>
 
     <div class="article-title">
-        More storms hit central US with tornadoes and severe winds, while the West and North brace for more rain and snow.
+       {{news?.title?news?.title:''}}
     </div>
 
     <img src="https://via.placeholder.com/375x200" alt="Article Image" class="article-image">
     <div class="article-caption">Damage of tornadoes</div>
 
-    <div class="article-content">
-        CNN — As severe storms prompted at least nine tornado reports in parts of the central US, a barrage of snow, rain and harsh wind was forecast Monday in places from the West Coast to the Great Lakes, including some still without power following a similar string of severe weather last week.
-
-        More than 216,000 US homes and businesses were without power as of Monday evening, according to <a href="#">PowerOutage.us</a>. More than two-thirds of the outages were in Michigan, where a previous ice storm damaged trees and utility lines. Almost 55,000 outages were reported in California.
-
-        In Oklahoma, almost 10 tornadoes and 12 injuries were reported in severe weather on Sunday. Tornadoes were also reported in Kansas and Texas.
+    <div class="article-content" [innerHTML]="news?.content?news?.content:''">
     </div>
 
     <div class="article-actions">

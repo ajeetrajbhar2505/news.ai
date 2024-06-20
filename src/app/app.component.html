@@ -1,7 +1,6 @@
 <router-outlet></router-outlet>
 <div class="footer">
     <i class="fa fa-home" routerLink="/home"></i>
-    <i class="fa fa-compass" (click)="refreshNews()"></i>
+    <i class="fa fa-compass {{webService.rotate?'rotate':''}}" (click)="refreshNews()"></i>
     <i class="fa fa-bookmark"></i>
-    <!-- <i class="fa fa-user"></i> -->
 </div>

@@ -285,3 +285,17 @@
     font-size: 14px;
     color: #333;
 }
+
+@keyframes rotate360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Class to apply the rotation animation */
+  .rotate {
+    animation: rotate360 2s linear infinite;
+  }

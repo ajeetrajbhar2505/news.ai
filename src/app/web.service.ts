@@ -10,6 +10,7 @@ import { Requestmodels } from './models/Requestmodels.module';
 export class WebService {
   headers: any = new Headers({});
   currentQuestion:string = ""
+  rotate:boolean = false
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,7 @@ export class WebService {
   }
 
   regenerateNews(topic = this.currentQuestion || 'Sports'){
+    this.rotate = true
     const payload = {
       category : topic,
       "prompt": `could you give news on ${topic} of India, i want to integrate in frontend so i was title  and description of that,title should be in title key and dexription in description`
@@ -36,6 +38,7 @@ export class WebService {
       .subscribe(
         (data) => {
           if (data != null) {
+            this.rotate = false
             if (data.status !== 200) {
               return;
             }
