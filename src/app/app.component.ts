@@ -8,10 +8,14 @@ import { WebService } from './web.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  generated:boolean = false
+  constructor(public webService: WebService) { 
+  }
 
-  constructor(public webService: WebService) { }
-
-  refreshNews(){
-    this.webService.regenerateNews()
+  async refreshNews(){
+    this.generated = await this.webService.regenerateNews()
+    if (this.generated) {
+      this.webService.refreshNews.next(true)
+    }
   }
 }

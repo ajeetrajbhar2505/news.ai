@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class HomepageComponent implements OnInit {
   active: boolean = false
-  sportsNews: any = []
+  News: any = []
+  refreshNews:boolean = false
   private _unsubscribeAll!: Subject<any>;
   opensidebar() {
     this.active = !this.active
@@ -21,7 +22,13 @@ export class HomepageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.askQuestion('Sports')
+    this.webService.refreshNews.subscribe(refreshNews => {
+      this.refreshNews = refreshNews
+      if (refreshNews) {
+        this.askQuestion(this.webService.currentQuestion,this.refreshNews)
+      }
+    })
+    this.askQuestion('Sports',false)
   }
 
   routoToContent(contentId: string) {
@@ -29,7 +36,7 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  askQuestion(topic: string) {
+  askQuestion(topic: string,refreshNews:boolean) {
     this.webService.currentQuestion = topic
     const payload = {
       category: topic,
@@ -47,7 +54,25 @@ export class HomepageComponent implements OnInit {
             if (data.status !== 200) {
               return;
             }
-            this.sportsNews = data.response || []
+            const OldNews:any = this.News
+            this.News = data.response || []
+            if (OldNews.length > 0 && (refreshNews)) {
+              for (const newsItem of this.News) {
+                const found = OldNews.find((oldItem:any) => oldItem._id === newsItem._id);
+                if (found) {
+                  newsItem.new = false;
+                } else {
+                  newsItem.new = true;
+                }
+              }
+            } else {
+              // If OldNews is empty, mark all news items as new
+              for (const newsItem of this.News) {
+                newsItem.new = false;
+              }
+            }
+            console.log(this.News);
+            
           }
         },
         (_error) => {
@@ -56,6 +81,12 @@ export class HomepageComponent implements OnInit {
         () => { }
       );
 
+  }
+
+  formatDateString(dateString: any) {
+    const options: any = { year: 'numeric', month: 'short', day: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', options);
   }
 
 }

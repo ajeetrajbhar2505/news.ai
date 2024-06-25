@@ -22,7 +22,7 @@
 
     <div class="breaking-news">
         <h2>Breaking News</h2>
-        <div class="news-item" (click)="routoToContent(data._id)" *ngFor="let data of sportsNews">
+        <div class="news-item" (click)="routoToContent(data._id)" *ngFor="let data of News">
             <img src="assets/latestnews.png" alt="Latest News">
             <div class="news-content">
                 <h3 [innerHTML]="data.title"></h3>
@@ -32,19 +32,20 @@
     </div>
 
     <div class="categories">
-        <div class="category" (click)="askQuestion('Sports')">Sports</div>
-        <div class="category" (click)="askQuestion('Politics')">Politics</div>
-        <div class="category" (click)="askQuestion('Technology')">Technology</div>
-        <div class="category" (click)="askQuestion('Health')">Health</div>
-        <div class="category" (click)="askQuestion('Entertainment')">Entertainment</div>
-        <div class="category" (click)="askQuestion('Business')">Business</div>
-        <div class="category" (click)="askQuestion('World')">World</div>
-        <div class="category" (click)="askQuestion('Science')">Science</div>
+        <div class="category" (click)="askQuestion('Sports',false)">Sports</div>
+        <div class="category" (click)="askQuestion('Politics',false)">Politics</div>
+        <div class="category" (click)="askQuestion('Technology',false)">Technology</div>
+        <div class="category" (click)="askQuestion('Health',false)">Health</div>
+        <div class="category" (click)="askQuestion('Entertainment',false)">Entertainment</div>
+        <div class="category" (click)="askQuestion('Business',false)">Business</div>
+        <div class="category" (click)="askQuestion('World',false)">World</div>
+        <div class="category" (click)="askQuestion('Science',false)">Science</div>
     </div>
 
     <div class="recommended">
         <h2>News of the day</h2>
-        <div class="recommended-item" (click)="routoToContent(data._id)" *ngFor="let data of sportsNews">
+        <div class="recommended-item" (click)="routoToContent(data._id)" *ngFor="let data of News">
+            <img src="assets/new.png" alt="" *ngIf="data.new" class="new">
             <img src="assets/latestnews.png" alt="Latest News">
             <div class="recommended-content">
                 <h3 [innerHTML]="data.title"></h3>
