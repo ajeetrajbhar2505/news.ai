@@ -48,7 +48,7 @@
             <img src="assets/latestnews.png" alt="Latest News">
             <div class="recommended-content">
                 <h3 [innerHTML]="data.title"></h3>
-                <!-- <p [innerHTML]="data.description"></p> -->
+                <p [innerHTML]="formatDateString(data.publishedAt)"></p>
             </div>
         </div>
     </div>
