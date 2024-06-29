@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  nodeApi : 'http://localhost:3000/'
+  nodeApi : 'https://newsbackend-kfct.onrender.com/'
 };
 
 /*
